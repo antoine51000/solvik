@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0b0c12" />
+  <title>Solvik</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell" id="app-shell">
+    <header class="top-bar">
+      <button class="icon-btn" id="open-notif-btn" aria-label="Notifications">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+          <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+        </svg>
+        <span class="dot-gold" id="notif-dot"></span>
+      </button>
+
+      <div class="brand-center">
+        <span class="brand-logo">SOLVIK</span>
+        <span class="brand-badge" id="brand-badge">MOBILE • OPEN</span>
+      </div>
+
+      <button class="icon-btn" id="open-mp-btn" aria-label="Messages">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="22" y1="2" x2="11" y2="13" />
+          <polygon points="22 2 15 22 11 13 2 9 22 2" />
+        </svg>
+        <span class="dot-pink"></span>
+      </button>
+    </header>
+
+    <main class="content-area">
+      <section class="view active" id="view-accueil">
+        <div class="stories-strip" id="stories-strip"></div>
+
+        <div class="pass-bar" id="banner-to-pass">
+          <div>
+            <span class="pass-pill">PASS MENSUEL OFFERT</span>
+            <p>Tirage gratuit dans <strong id="mini-timer">11j 04h</strong></p>
+          </div>
+          <span class="pass-cta">Tenter →</span>
+        </div>
+
+        <div class="feed-filters">
+          <button class="filter-chip active" data-filter="all">Pour toi</button>
+          <button class="filter-chip" data-filter="trending">En feu 🔥</button>
+          <button class="filter-chip" data-filter="vip">Pass VIP</button>
+          <button class="filter-chip" data-filter="saved">Enregistrés</button>
+        </div>
+
+        <div id="feed-list" class="feed-list"></div>
+      </section>
+
+      <section class="view" id="view-recherche">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <input type="search" id="search-input" placeholder="Chercher un créateur, un post ou #tag..." autocomplete="off" />
+        </div>
+
+        <div class="explore-tags">
+          <button class="chip-tag" data-tag="#solvik">#solvik</button>
+          <button class="chip-tag" data-tag="#vibe">#vibe</button>
+          <button class="chip-tag" data-tag="#pass">#pass</button>
+          <button class="chip-tag" data-tag="#défi">#défi</button>
+          <button class="chip-tag" data-tag="#dev">#dev</button>
+        </div>
+
+        <div class="explore-grid" id="explore-grid"></div>
+        <h3 class="section-label">Résultats</h3>
+        <div id="search-results" class="feed-list"></div>
+      </section>
+
+      <section class="view" id="view-pass">
+        <div class="pass-card">
+          <div class="pass-top">
+            <span class="pass-label">PASS SOLVIK • 1 OFFERT / MOIS</span>
+            <span class="pass-state" id="pass-state-pill">STANDARD</span>
+          </div>
+          <h2>Le Pass VIP qu'on gagne au lieu de payer</h2>
+          <p class="pass-sub">Chaque mois, Solvik offre le Pass complet à un membre actif. Cadre doré, badge exclusif, mise en avant et boost sur tes posts & MP.</p>
+
+          <div class="perks-list">
+            <div class="perk"><strong>✨ Cadre & Badge Or</strong><span>Sur ton profil et tes posts</span></div>
+            <div class="perk"><strong>🚀 Boost Fil</strong><span>Visibilité mise en avant</span></div>
+            <div class="perk"><strong>💬 MP Boostés</strong><span>Réactions & effets spéciaux</span></div>
+            <div class="perk"><strong>🎨 Styles Exclusifs</strong><span>Thèmes & cartes débloqués</span></div>
+          </div>
+
+          <div class="countdown-strip">
+            <span>Prochain tirage gratuit</span>
+            <strong id="pass-countdown">11j 04h 32m 10s</strong>
+          </div>
+
+          <button class="btn-gold" id="join-pass-btn">Participer gratuitement au tirage</button>
+          <button class="btn-ghost-gold" id="simulate-win-btn">Activer / Tester le Pass sur mon compte</button>
+        </div>
+
+        <div class="winner-box">
+          <span class="section-label">Gagnant du mois</span>
+          <div class="winner-card">
+            <div class="avatar vip-ring bg-sunset">MK</div>
+            <div class="winner-meta">
+              <strong>@mael_k <span class="badge-vip">PASS</span></strong>
+              <p>A décroché le Pass du mois • Actif cette semaine</p>
+            </div>
+            <button class="btn-sm" data-chat="mael_k">MP</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="view-compte">
+        <div class="account-banner" id="account-banner">
+          <button class="btn-edit" id="open-edit-btn">Éditer profil</button>
+        </div>
+        <div class="account-card">
+          <div class="avatar lg bg-neon" id="account-avatar">LP</div>
+          <div class="account-name">
+            <h2 id="account-username">@leo_p</h2>
+            <span class="badge-vip hidden" id="account-vip-badge">PASS</span>
+          </div>
+          <p class="account-bio" id="account-bio">Créateur de Solvik • Open Source & mobile-first</p>
+
+          <div class="account-stats">
+            <div><strong id="stat-posts">0</strong><span>Posts</span></div>
+            <div><strong id="stat-likes">0</strong><span>Réactions</span></div>
+            <div><strong id="stat-pass">0</strong><span>Pass</span></div>
+          </div>
+        </div>
+
+        <h3 class="section-label">Mes posts</h3>
+        <div id="my-posts-list" class="feed-list"></div>
+      </section>
+
+      <section class="view" id="view-mp">
+        <div id="mp-list-view">
+          <div class="sub-header">
+            <button class="btn-back" id="close-mp-btn">← Fil</button>
+            <h2>Messages</h2>
+          </div>
+          <div id="mp-list" class="mp-list"></div>
+        </div>
+
+        <div id="mp-room-view" class="hidden">
+          <div class="sub-header">
+            <button class="btn-back" id="back-mp-list">←</button>
+            <div>
+              <strong id="room-username">@mael_k</strong>
+              <span class="online-txt">● En ligne</span>
+            </div>
+          </div>
+
+          <div class="quick-replies">
+            <button type="button" class="quick-msg" data-q="T'es chaud ? 🔥">T'es chaud ? 🔥</button>
+            <button type="button" class="quick-msg" data-q="Mdrrr 💀">Mdrrr 💀</button>
+            <button type="button" class="quick-msg" data-q="Viens on voit ça 👀">Viens on voit ça 👀</button>
+          </div>
+
+          <div id="chat-box" class="chat-box"></div>
+
+          <form id="chat-form" class="chat-bar">
+            <input type="text" id="chat-input" placeholder="Envoie un message..." autocomplete="off" />
+            <button type="submit">Envoyer</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="view" id="view-notifs">
+        <div class="sub-header">
+          <button class="btn-back" id="close-notif-btn">← Fil</button>
+          <h2>Notifications</h2>
+        </div>
+        <div id="notif-list" class="notif-list"></div>
+      </section>
+    </main>
+
+    <div class="sheet-backdrop" id="create-sheet">
+      <div class="sheet">
+        <div class="sheet-bar"></div>
+        <div class="sheet-head">
+          <strong>Nouveau post Solvik</strong>
+          <button class="sheet-close" id="close-create-btn">✕</button>
+        </div>
+
+        <label class="mini-label">Style visuel de la carte (façon Insta)</label>
+        <div class="theme-picker" id="theme-picker">
+          <button type="button" class="theme-dot active" data-card-style="none" title="Classique">Texte</button>
+          <button type="button" class="theme-dot style-neon" data-card-style="card-neon">Néon</button>
+          <button type="button" class="theme-dot style-sunset" data-card-style="card-sunset">Sunset</button>
+          <button type="button" class="theme-dot style-mint" data-card-style="card-mint">Mint</button>
+        </div>
+
+        <input type="url" class="sheet-input" id="post-image-url" placeholder="Lien d'image optionnel (https://...)" />
+        <textarea id="post-caption" rows="3" maxlength="280" placeholder="Écris ta légende ou ton idée... #solvik"></textarea>
+
+        <div class="sheet-foot-tags">
+          <button type="button" class="add-hash" data-hash="#solvik">#solvik</button>
+          <button type="button" class="add-hash" data-hash="#vibe">#vibe</button>
+          <button type="button" class="add-hash" data-hash="#défi">#défi</button>
+        </div>
+
+        <button class="btn-main" id="submit-post-btn">Publier</button>
+      </div>
+    </div>
+
+    <div class="sheet-backdrop" id="comment-sheet">
+      <div class="sheet">
+        <div class="sheet-bar"></div>
+        <div class="sheet-head">
+          <strong>Commentaires</strong>
+          <button class="sheet-close" id="close-comment-btn">✕</button>
+        </div>
+        <div id="comments-list" class="comments-list"></div>
+        <form id="comment-form" class="comment-bar">
+          <input type="text" id="comment-input" placeholder="Répondre au post..." autocomplete="off" />
+          <button type="submit">Poster</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="sheet-backdrop" id="edit-sheet">
+      <div class="sheet">
+        <div class="sheet-bar"></div>
+        <div class="sheet-head">
+          <strong>Modifier le profil</strong>
+          <button class="sheet-close" id="close-edit-btn">✕</button>
+        </div>
+        <label class="mini-label">Pseudo</label>
+        <input type="text" class="sheet-input" id="edit-name-input" maxlength="20" />
+        <label class="mini-label">Bio</label>
+        <textarea id="edit-bio-input" rows="2" maxlength="100"></textarea>
+        <button class="btn-main" id="save-edit-btn">Sauvegarder</button>
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <button class="nav-btn active" data-target="accueil">
+        <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V10z" />
+        </svg>
+        <span>Accueil</span>
+      </button>
+
+      <button class="nav-btn" data-target="recherche">
+        <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        <span>Recherche</span>
+      </button>
+
+      <button class="nav-plus" id="open-create-btn" aria-label="Publier">+</button>
+
+      <button class="nav-btn" data-target="pass">
+        <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        </svg>
+        <span>Pass</span>
+      </button>
+
+      <button class="nav-btn" data-target="compte">
+        <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+        </svg>
+        <span>Compte</span>
+      </button>
+    </nav>
+
+    <div class="toast" id="toast"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
